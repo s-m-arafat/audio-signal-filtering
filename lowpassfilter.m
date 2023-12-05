@@ -18,16 +18,20 @@ filter_order = 32;
 
 lpf = designfilt('lowpassfir', 'FilterOrder', filter_order, 'CutoffFrequency', cutoff_freq, 'SampleRate', fs);
 % freqz(lpf);
-% filtered_signal = filter(lpf, combined_signal);
+filtered_signal_phase = filter(lpf, combined_signal);
 filtered_signal = filtfilt(lpf, combined_signal);
 
 figure;
-subplot(311)
+subplot(411)
 plot(t, combined_signal, 'b', 'LineWidth', 1.5);
 title('combined Signal');
-subplot(312)
+subplot(412)
 plot(t, filtered_signal, 'r', 'LineWidth', 1.5);
 title('Filtered Signal (Zero-Phase)');
-subplot(313)
+subplot(413)
+plot(t, filtered_signal_phase, 'g', 'LineWidth', 1.5);
+subplot(414)
 plot(t, signal1, 'g', 'LineWidth', 1.5);
 title('Signal 1');
+
+saveas(gcf, 'plot.jpeg');
